@@ -1,23 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './ExpenseForm.css';
 
 function ExpenseForm() {
 
+    // State
+
+    const [enteredTitle, setEnteredTitle] = useState('');
+    const [enteredAmount, setEnteredAmount] = useState('');
+    const [enteredDate, setEnteredDate] = useState('');
+
+    // const [userInput, setUserInput] = useState({
+    //     enteredTitle: '',
+    //     enteredAmount: '',
+    //     enteredDate: '',
+    // });
+
+    // Handlers
+
     const titleChangeHandler = (event) => {
-        console.log(event.target.value);
+        setEnteredTitle(event.target.value);
+
+        // Not this...
+        
+        // setUserInput({
+        //     ...userInput,
+        //     enteredTitle: event.target.value
+        // });
+        
+        // but... this
+        
+        // setUserInput((prevState) => {
+        //     return { ...prevState, enteredTitle: event.target.value }
+        // });
     }
 
     const amountChangeHandler = (event) => {
-        console.log(event.target.value);
+        setEnteredAmount(event.target.value);
+        // setUserInput((prevState) => {
+        //     return { ...prevState, enteredAmount: event.target.value }
+        // });     
     }
 
     const dateChangeHandler = (event) => {
-        console.log(event.target.value);
+        setEnteredDate(event.target.value);
+        // setUserInput((prevState) => {
+        //     return { ...prevState, entereDate: event.target.value }
+        // });     
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        const expenseData = {
+            title: enteredTitle,
+            amount: enteredAmount,
+            date: new Date(enteredDate)
+        }
+
+        console.log(expenseData);
+
+        // Two way Binding
+
+        setEnteredTitle('');
+        setEnteredAmount('');
+        setEnteredDate('');
+
     }
 
     return (
-        <form>
+        <form onSubmit={submitHandler}>
 
             <div className="new-expense__controls">
                 <div className="new-expense__control">
@@ -28,6 +80,7 @@ function ExpenseForm() {
                         type="text"
                         name="expenseTitle"
                         id="expense-title"
+                        value={enteredTitle}
                         onChange={titleChangeHandler}
                     />
                 </div>
@@ -41,6 +94,7 @@ function ExpenseForm() {
                         id="expense-amount"
                         min="0.01"
                         step="0.01"
+                        value={enteredAmount}
                         onChange={amountChangeHandler}
                     />
                 </div>
@@ -54,6 +108,7 @@ function ExpenseForm() {
                         id="expense-date"
                         min="2019-01-01"
                         max="2202-12-31"
+                        value={enteredDate}
                         onChange={dateChangeHandler}
                     />
                 </div>
