@@ -12,7 +12,7 @@ const Expenses = (props) => {
         <Card className="expenses">
             {expenses.map((item, index) => (
                 <ExpenseItem
-                    key={index}
+                    key={item.id}
                     title={item.title}
                     amount={item.amount}
                     date={item.date}

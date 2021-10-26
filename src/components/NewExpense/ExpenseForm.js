@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './ExpenseForm.css';
 
-function ExpenseForm() {
+function ExpenseForm(props) {
 
     // State
 
@@ -58,14 +58,13 @@ function ExpenseForm() {
             date: new Date(enteredDate)
         }
 
-        console.log(expenseData);
+        props.onSaveExpenseData(expenseData);
 
         // Two way Binding
 
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');
-
     }
 
     return (
