@@ -50,6 +50,7 @@ function ExpenseForm(props) {
     }
 
     const submitHandler = (event) => {
+        
         event.preventDefault();
 
         const expenseData = {
